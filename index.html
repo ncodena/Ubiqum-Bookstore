@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Vollkorn&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="header">
+        <div class="logoContainer">
+            <img src="logo.png" alt="logo">
+        </div>
+    </div>
+    <div id="bookPage">
+        <div class="main-container">
+            <div id="loader" class="lds-spinner loader-container" v-if="isLoading">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="afterLoader" v-else>
+                <div class="inputContainer">
+                    <label>Search your book:</label>
+                    <input placeholder="Filter books by title" type="text" v-model="input">
+                </div>
+                <div class="errorContainer" v-if="getFilteredBooks.length == 0">
+                    <p class="fa fa-info-circle">NO RESULTS FOUND</p>
+                    <div class="lupaContainer">
+                        <img src="lupa.png">
+                    </div>
+                </div>
+                <div class="backgroundContainer">
+                    <div class="dark-cover"></div>
+                    <div class="cardContainer">
+                        <div class="flip-card" v-for="book in getFilteredBooks">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <img :src="book.portada" alt="portada">
+                                </div>
+                                <div class="flip-card-back">
+                                    <h1>{{book.titulo}}</h1>
+                                    <p class="cardContent">{{book.descripcion}}</p>
+                                    <button><a data-fancybox="gallery" :href="book.detalle">+ INFO</a></button>
+                                    <img :src="book.detalle" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="footer">
+                    <p class="footerContainer">2019 UBIQUM BOOKSTORE | All rights reserved</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="books.js"></script>
+
+</body>
+
+</html>
